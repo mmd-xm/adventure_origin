@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>冒险本源 AdventureOrigin</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { width: 100%; height: 100%; overflow: hidden; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        
+        /* 背景图 */
+        .bg-cover {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('/AdventureOriginWeb/res/AdventureOrigin.png') no-repeat center center/cover;
+            z-index: -1;
+        }
+
+        /* 中间半透明白框 */
+        .content-box {
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80vw; height: 80vh;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            padding: 40px;
+            opacity: 0; 
+            transition: opacity 1s ease-in-out; 
+        }
+        .content-box.show { opacity: 1; }
+
+        /* 框内排版样式 */
+        .header { display: flex; align-items: center; margin-bottom: 20px; }
+        
+        /* 静态图标 */
+        .static-icon {
+            width: 100px; height: 100px;
+            border-radius: 15px;
+            flex-shrink: 0;
+        }
+        
+        .game-title { margin-left: 20px; color: #2e7d32; font-size: 28px; font-weight: bold; }
+        .intro-text { font-size: 16px; line-height: 1.6; color: #333; margin-bottom: 30px; }
+        .scrollable-content { height: calc(100% - 140px); overflow-y: auto; padding-right: 10px; }
+
+        /* 版本下载折叠框样式 */
+        .version-item { border: 1px solid #ddd; border-radius: 10px; margin-bottom: 10px; overflow: hidden; }
+        .version-item summary {
+            padding: 15px 20px; background: #f9f9f9;
+            cursor: pointer; font-weight: bold; font-size: 16px;
+            list-style: none; display: flex; justify-content: space-between; align-items: center;
+        }
+        .version-item summary::-webkit-details-marker { display: none; }
+        .version-item summary::after { content: '+'; font-size: 20px; color: #666; transition: transform 0.3s; }
+        .version-item[open] summary::after { content: '-'; }
+        
+        .download-links { padding: 15px 20px; display: flex; gap: 15px; background: #fff; }
+        .dl-btn {
+            padding: 10px 20px; background: #4CAF50; color: #fff;
+            text-decoration: none; border-radius: 6px; font-size: 14px;
+            transition: background 0.3s;
+        }
+        .dl-btn:hover { background: #45a049; }
+
+        /* 更新内容样式 */
+        .changelog {
+            padding: 0 20px 15px 20px;
+            background: #fff;
+            border-top: 1px dashed #eee; /* 虚线分隔 */
+        }
+        .changelog h4 {
+            font-size: 14px; color: #666; margin-bottom: 8px;
+        }
+        .changelog ul {
+            padding-left: 20px; font-size: 14px; color: #444; line-height: 1.8;
+        }
+
+	/*自动换行！ */
+        .changelog p {
+            font-size: 14px; color: #444; line-height: 1.8;
+            white-space: pre-line; 
+        }
+
+        /* 滚动条美化 */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+    <div class="bg-cover"></div>
+
+    <div class="content-box" id="contentBox">
+        <div class="header">
+            <img src="/adventure_origin/res/life_origin.gif" alt="Icon" class="static-icon">
+            <h1 class="game-title">冒险本源 AdventureOrigin</h1>
+        </div>
+
+        <div class="scrollable-content">
+            <div class="intro-text">
+                <div class="intro-text">
+                <p>欢迎您来到《冒险本源》，这是由b站up主@萌萌哒的晞萌 开发的一款Minecraft同人游戏</p>
+		<br>
+		<a href="https://b23.tv/cfhEIhf]https://b23.tv/cfhEIhf">点击可跳转至作者动态</a>
+		<br>
+		<a href="https://afdian.com/a/AdventureOrigin">点击可跳转至赞助页面</a>
+		<p>qq交流群：424103608</p>
+		<br>
+		<p>开发者：</p>
+		<p>游戏设计，程序：@萌萌哒的晞萌</p>
+		<p>美术：@TN-X404 @萌萌哒的晞萌</p>
+		<p>部分资源提供：@是阿根a</p>
+		<br>
+		<p>游戏还在开发中，更多内容与后续，请关注作者动态，敬请期待</p>
+		<p>最后感谢您的游玩，祝您能有一段美好的游戏之旅～</p>
+		<br>
+		<p>以下是游戏下载链接及更新日志</p>
+		<br>
+            </div>
+
+            <!-- 版本 1.0.1 -->
+            <details class="version-item">
+                <summary>冒险本源 1.0.1 (最新版本)</summary>
+                <div class="download-links">
+                    <a href="/adventure_origin/out/冒险本源1.0.1电脑版.zip" download class="dl-btn">点击下载冒险本源1.0.1电脑版</a>
+                    <a href="/adventure_origin/out/冒险本源1.0.1手机版.zip" download class="dl-btn">点击下载冒险本源1.0.1手机版</a>
+                </div>
+                <div class="changelog">
+                    <h4>更新内容：</h4>
+                    <p>
+新增：
+-武器：土豆，苹果，随机武器方块，随机怪物方块
+-怪物：随机僵尸
+-关卡：平原13，14，15，向日葵平原3，草甸1
+-成就：幸运，套娃盲盒？，我生下我，梅开二度
+-小游戏：诸神
+-工具：运输箱子
+-其它：buff粒子效果，剧情书
+-春节大礼包
+
+修复：
+-成就提示的文字颜色错乱
+-牛和鸡的血量错误
+-有固定选卡时，无法正常恢复到上次选卡
+-部分buff存在一些武器或怪物无效
+-幽灵buff伤害计算错误
+-掉落物碰撞箱位置错误
+
+游戏修改：
+-游戏关卡波数修改为10小波有1大波
+-金苹果在每一大波中的第4，8波各获得一个
+-雨天亮度减少30
+-黑夜亮度修改为固定50，1-10亮度固定为80-30=50，黑夜不再随着时间推移变暗
+-传送带速度修改：难度1：4s，难度2：4.5s，难度3：5s，难度4：5.5s，难度5：6s
+
+武器修改：
+-红石矿灵：速度调整为15～20s
+-TNT：大招修改为伤害翻倍，范围扩大到5×5
+-水桶：修改为175红石，攻速1.5s，攻击不再直接提供寒冷效果，而是每次攻击提供5点寒冷值，大招提供25点寒冷值，湿润范围增加到5*5
+-小麦：修改为150红石，召唤间隔修改为10s，金苹果催化bug修复，大幅削弱
+-甜菜：修改为175红石，小甜菜根伤害提高为10点
+-向日葵：大招每个瓜子攻击次数翻倍，子弹攻击方式优化
+
+怪物修改：
+-蔬菜农髅：难度系数提高为1.5，食用间隔提高为8秒，饱食buff削弱见下文
+-暮光僵尸：暮光间隔改为10s，受光明buff与混沌buff的影响修改见下文
+-混沌艮牛：血量提高为1万，技能释放速度提高为3s，二阶段移动速度提高为2s，会受到寒冷buff的影响（最高只会受到60%）
+
+buff修改：
+-寒冷buff：每个角色具有一个寒冷值，寒冷值每过1s就会自动掉一点，1～5点提供寒冷buff I，各项速度属性均降低到原来的80%，6～10点提供寒冷buff II，降低到原来的60%以此类推到达V级的时候无法活动（boss最高只能受到寒冷buff III）
+-饱食buff速度调整为每一秒恢复一次
+-光照buff调整为：
+亮度(60，100]
+光照buff I，农作物生长速度提高10%
+暮光系怪物伤害降低10%，速度降低5%
+亮度(100，120]光照buff II，农作物生长速度提高25%
+暮光系怪物伤害降低25%，速度降低10%
+亮度(120，+∞)光照buff III，农作物生长速度提高40%
+暮光系怪物伤害降低40%，速度降低20%
+-麻痹buff正式能够让武器和怪物无法活动（Boss除外）
+
+优化：
+-光照系统大优化
+-灵源籍内容补充完整
+-剧情内容优化
+-打僵尸小游戏攻击优化，手机端正常显示剑
+-部分设备文字乱码的情况
+-手机版可以双指缩放选关地图，大地图，成就界面
+-草径关卡寻路随机性增强
+-锄头耕地时可以直接移除杂草
+-投掷物会在空中旋转
+-掉落物在拾起后会稍微停顿一下才能放置（防止之前再拿起甜菜的时候就直接放置了）
+-回血粒子特效
+-公告优化
+-移除漫天星辰
+                    </p>
+                </div>
+            </details>
+
+            <!-- 版本 1.0 -->
+            <details class="version-item">
+                <summary>冒险本源 1.0</summary>
+                <div class="download-links">
+                    <a href="/adventure_origin/out/冒险本源1.0电脑版.zip" download class="dl-btn">点击下载冒险本源1.0电脑版</a>
+                    <a href="/adventure_origin/out/冒险本源1.0手机版.zip" download class="dl-btn">点击下载冒险本源1.0手机版</a>
+                </div>
+                <div class="changelog">
+                    <h4>更新内容：</h4>
+                    <p>
+0.1
+新增：平原场景
+新增：发射器
+新增：普通僵尸
+新增：金苹果大招
+0.2
+新增武器：红石矿灵
+新增武器：TNT
+新增武器：黑曜石
+新增武器：剑
+新增武器：小型tnt
+新增武器：水桶，寒冷buff
+新增怪物：护具/工具/武装/小/旗帜僵尸，护具值系统
+新增怪物：小白
+0.3
+优化：关卡地图
+新增：关卡胜负判定
+优化：敌人刷新
+新增：关卡暂停界面及设置
+新增：背包系统
+新增：工具栏的剑/镐/斧/装备/护盾，破甲buff
+优化：手机武器和金苹果放置
+优化：红石矿灵生产等时间增加随机性
+0.4
+新增武器：金苹果圣树，圣光buff
+新增怪物：盾牌僵尸
+新增：快捷键
+新增怪物：蔬菜农髅，饱食buff
+新增：锄头耕地
+新增武器：小麦，鸡和牛
+新增武器：西瓜
+新增：绿宝石
+新增：腐肉
+新增武器：马铃薯
+优化：掉落物拖动收集
+优化：空中单位与武器高度
+新增武器：甜菜根
+新增武器：胡萝卜
+新增：物品显示栏
+新增：经验
+新增武器：花
+优化：光照系统
+新增武器：火把
+新增怪物：暮光僵尸，暮光buff
+新增：游戏血量
+新增怪物：放牧尸
+新增：杂草
+优化：武器融合放置
+新增武器：南瓜，南瓜灯，恐惧buff，幽灵buff
+1.0
+大优化：武器怪物数值大平衡，代码优化
+新增：关卡进程完善，第一章主线关卡与选关地图
+新增：角色系统与存档
+新增武器：向日葵
+新增关卡：小游戏打僵尸
+新增关卡：草径，向日葵平原
+新增：随机天气
+新增：雨天，暴雨天
+新增：传送带
+新增boss：混沌艮牛
+新增：图鉴
+新增：成就
+新增：剧情系统
+新增剧情：第一章剧情
+最后：封面，选关地图，测试
+                    </p>
+                </div>
+            </details>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const contentBox = document.getElementById('contentBox');
+            contentBox.classList.add('show');
+        };
+    </script>
+</body>
+</html>
